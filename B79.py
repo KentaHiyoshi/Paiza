@@ -1,6 +1,3 @@
-import random
-
-
 def split_name(names):
     return names.split()
 
@@ -25,18 +22,20 @@ def convert_name_to_num(conversion_list, name):
 
 def calculate_buddy_point(buddy_point):
 
-    aggregated_point = []
+    aggregated_point = buddy_point
 
-    for i in range(len(buddy_point)-1):
-        sum_neighbor = buddy_point[i] + buddy_point[i+1]
+    while len(aggregated_point) > 1:
+        summarized_point = []
+        
+        for i in range(len(aggregated_point)-1):
+            sum_neighbor = aggregated_point[i] + aggregated_point[i+1]
 
-        if sum_neighbor > 101:
-            sum_neighbor = sum_neighbor % 101
-    
-        aggregated_point.append(sum_neighbor)
-    
-    if len(aggregated_point) > 1:
-        return calculate_buddy_point(aggregated_point)
+            if sum_neighbor > 101:
+                sum_neighbor = sum_neighbor % 101
+        
+            summarized_point.append(sum_neighbor)
+
+        aggregated_point = summarized_point
 
     return aggregated_point[0]
 
