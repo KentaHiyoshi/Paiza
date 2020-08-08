@@ -24,7 +24,21 @@ def convert_name_to_num(conversion_list, name):
 
 
 def calculate_buddy_point(buddy_point):
-    return random.randint(0, 100)
+
+    aggregated_point = []
+
+    for i in range(len(buddy_point)-1):
+        sum_neighbor = buddy_point[i] + buddy_point[i+1]
+
+        if sum_neighbor > 101:
+            sum_neighbor = sum_neighbor % 101
+    
+        aggregated_point.append(sum_neighbor)
+    
+    if len(aggregated_point) > 1:
+        return calculate_buddy_point(aggregated_point)
+
+    return aggregated_point[0]
 
 
 def generate_structured_buddy_point(converted_names):
@@ -37,8 +51,8 @@ def generate_structured_buddy_point(converted_names):
 
 
 if __name__ == "__main__":
-    test_name = "rose hiyo"
-    names = split_name(test_name)
+    input_line = input()
+    names = split_name(input_line)
     conversion_list = generate_conversion_list()
 
     # Convert name from alphabet to number for calculating buddy point
